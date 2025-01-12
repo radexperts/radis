@@ -1,0 +1,37 @@
+{% extends "extractions/extractions_layout.html" %}
+{% load bootstrap_icon from common_extras %}
+{% block title %}
+    Extraction Instance
+{% endblock title %}
+{% block heading %}
+    <div class="d-flex justify-content-between align-items-start">
+        <h4 class="mb-3">Extraction Instance</h4>
+    </div>
+{% endblock heading %}
+{% block content %}
+    <dl class="row">
+        <dt class="col-sm-3">Extraction Instance ID</dt>
+        <dd class="col-sm-9">
+            {{ extraction_instance.id }}
+        </dd>
+        <dt class="col-sm-3">Task ID</dt>
+        <dd class="col-sm-9">
+            <a href="{% url task_url_name extraction_instance.task.id %}">
+                {{ extraction_instance.task.id }}
+                {% bootstrap_icon "box-arrow-in-down-right" %}
+            </a>
+        </dd>
+        <dt class="col-sm-3">Job ID</dt>
+        <dd class="col-sm-9">
+            <a href="{% url job_url_name extraction_instance.task.job.id %}">
+                {{ extraction_instance.task.job.id }}
+                {% bootstrap_icon "box-arrow-in-down-right" %}
+            </a>
+        </dd>
+        <dt class="col-sm-3">Accepted</dt>
+        <dd class="col-sm-9">
+            {{ extraction_instance.is_accepted|yesno:"Yes,No" }}
+        </dd>
+    </dl>
+    {% include "extractions/_extraction_result_summary.html" %}
+{% endblock content %}
